@@ -21,7 +21,7 @@ if [ -d $FWROOT ]; then
     rm -rf $FWROOT
 fi
 
-ALL_SYSTEMS=("iPhone" "AppleTV" "MacOSX", "WatchOS")
+ALL_SYSTEMS=("iPhone" "AppleTV" "MacOSX" "WatchOS")
 
 function check_bitcode() {
     local FWDIR=$1
