@@ -70,6 +70,10 @@ if [ $FWTYPE == "dynamic" ]; then
             MIN_SDK="-macosx_version_min 10.11"
         elif [[ $PLATFORM == iPhoneSimulator* ]]; then
             MIN_SDK="-ios_simulator_version_min 11.0"
+        elif [[ $PLATFORM == WatchOS* ]]; then
+            MIN_SDK="-watchos_version_min 4.0"
+        elif [[ $PLATFORM == WatchOSSimulator* ]]; then
+            MIN_SDK="-watchos_simulator_version_min 4.0"
         else
             MIN_SDK="-ios_version_min 11.0"
         fi
