@@ -21,22 +21,22 @@ if [ -d $FWROOT ]; then
     rm -rf $FWROOT
 fi
 
-ALL_SYSTEMS=("iPhone" "AppleTV" "MacOSX")
+ALL_SYSTEMS=("iPhone" "AppleTV" "MacOSX", "WatchOS")
 
 function check_bitcode() {
     local FWDIR=$1
 
     if [[ $FWTYPE == "dynamic" ]]; then
-        BITCODE_PATTERN="__LLVM"
+   		BITCODE_PATTERN="__LLVM"
     else
-        BITCODE_PATTERN="__bitcode"
-    fi
+    	BITCODE_PATTERN="__bitcode"
+	fi
 
-    if otool -l "$FWDIR/$FWNAME" | grep "${BITCODE_PATTERN}" >/dev/null; then
-        echo "INFO: $FWDIR contains Bitcode"
-    else
-        echo "INFO: $FWDIR doesn't contain Bitcode"
-    fi
+	if otool -l "$FWDIR/$FWNAME" | grep "${BITCODE_PATTERN}" >/dev/null; then
+       		echo "INFO: $FWDIR contains Bitcode"
+	else
+        	echo "INFO: $FWDIR doesn't contain Bitcode"
+	fi
 }
 
 if [ $FWTYPE == "dynamic" ]; then
@@ -118,7 +118,9 @@ if [ $FWTYPE == "dynamic" ]; then
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
             echo "Created $FWDIR"
-            check_bitcode $FWDIR
+            if [[ $SYS != "WatchOS" ]]; then
+                check_bitcode $FWDIR
+            fi
         else
             echo "Skipped framework for $SYS"
         fi
@@ -137,7 +139,9 @@ else
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
             echo "Created $FWDIR"
-            check_bitcode $FWDIR
+            if [[ $SYS != "WatchOS" ]]; then
+                check_bitcode $FWDIR
+            fi
         else
             echo "Skipped framework for $SYS"
         fi
