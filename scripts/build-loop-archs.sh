@@ -69,11 +69,8 @@ elif [[ "${ARCH}" == "watchos_arm64_32" || "${ARCH}" == "watchos_armv7k" ]]; the
     esac
   fi
 
-  # Embed bitcode for SDK >= 9
   if [ "${CONFIG_DISABLE_BITCODE}" != "true" ]; then
-    if [[ "${SDKVERSION}" == 9.* || "${SDKVERSION}" == [0-9][0-9].* ]]; then
       LOCAL_CONFIG_OPTIONS="${LOCAL_CONFIG_OPTIONS} -fembed-bitcode"
-    fi
   fi
 
   # Add platform specific config options

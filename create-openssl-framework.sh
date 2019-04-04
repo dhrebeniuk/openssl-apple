@@ -118,9 +118,7 @@ if [ $FWTYPE == "dynamic" ]; then
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
             echo "Created $FWDIR"
-            if [[ $SYS != "WatchOS" ]]; then
-                check_bitcode $FWDIR
-            fi
+            check_bitcode $FWDIR
         else
             echo "Skipped framework for $SYS"
         fi
@@ -139,9 +137,7 @@ else
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
             echo "Created $FWDIR"
-            if [[ $SYS != "WatchOS" ]]; then
-                check_bitcode $FWDIR
-            fi
+            check_bitcode $FWDIR
         else
             echo "Skipped framework for $SYS"
         fi
